@@ -27,8 +27,8 @@ mongoose
 
     app.use(express.static(path.join(__dirname, 'public')));
 
-    app.use('/api/product', productRouter);
-    app.use('/api/order', orderRouter);
+    app.use('/product', productRouter);
+    app.use('/order', orderRouter);
 
     app.get('/', (_req, res) => {
       res.send('Hello, Express server is running!');
