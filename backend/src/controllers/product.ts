@@ -29,7 +29,12 @@ export const createProduct = (req: Request, res: Response, next: NextFunction) =
       const { _id } = createdProduct;
       res.status(201).json({
         status: 'success',
-        data: _id,
+        title,
+        image,
+        category,
+        description,
+        price,
+        _id,
       });
     })
     .catch((error) => next(new Error(`Ошибка при создании товара${error.message}`)));

@@ -1,4 +1,4 @@
-import { Error as MongooseError } from 'mongoose';
+import { CelebrateError } from 'celebrate';
 import { Request, Response, NextFunction } from 'express';
 import NotFoundError from '../errors/not-found-error';
 import BadRequestError from '../errors/bad-request-error';
@@ -17,7 +17,7 @@ const errorHandler = (err: Error, _req: Request, res: Response, _next: NextFunct
   } else if (err instanceof ConflictError) {
     statusCode = err.statusCode;
     message = err.message;
-  } else if (err instanceof MongooseError.ValidationError) {
+  } else if (err instanceof CelebrateError) {
     statusCode = 400;
     message = 'Ошибка валидации данных';
   } else if (err instanceof Error && err.message.includes('E11000')) {
