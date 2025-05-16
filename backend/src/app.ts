@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
 
-import productRouter from './routers/product';
-import orderRouter from './routers/order';
+import productRouter from './routes/product';
+import orderRouter from './routes/order';
 import errorHandler from './middlewares/error-handler';
 import { requestLogger, errorLogger } from './middlewares/logger';
 
@@ -27,8 +27,8 @@ mongoose
 
     app.use(express.static(path.join(__dirname, 'public')));
 
-    app.use('/product', productRouter);
-    app.use('/order', orderRouter);
+    app.use('/api/product', productRouter);
+    app.use('/api/order', orderRouter);
 
     app.get('/', (_req, res) => {
       res.send('Hello, Express server is running!');
