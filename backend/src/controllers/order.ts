@@ -31,10 +31,8 @@ export default (req: Request, res: Response, next: NextFunction) => {
       const orderId = simpleFaker.string.uuid();
       return res.status(200).json({
         status: 'success',
-        data: {
-          id: orderId,
-          total: totalPrice,
-        },
+        id: orderId,
+        total: totalPrice,
       });
     })
     .catch((error) => next(new Error(`Ошибка при создании заказа: ${error.message}`)));
