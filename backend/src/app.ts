@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
+import bodyParser from 'body-parser';
 
 import productRouter from './routes/product';
 import orderRouter from './routes/order';
@@ -22,6 +23,9 @@ mongoose
     console.log('Connected to MongoDB');
 
     console.log(path.join(__dirname, 'public'));
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use(requestLogger);
 
