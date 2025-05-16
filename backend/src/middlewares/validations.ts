@@ -24,7 +24,7 @@ const productSchema = Joi.object({
       .required(),
     originalName: Joi.string()
       .required(),
-  }),
+  }).required(),
   category: Joi.string()
     .required(),
   description: Joi.string(),

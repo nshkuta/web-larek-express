@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { simpleFaker } from '@faker-js/faker';
 import Product from '../models/product';
 import BadRequestError from '../errors/bad-request-error';
-import NotFoundError from '../errors/not-found-error';
 
 // Функция для создания заказа
 export default (req: Request, res: Response, next: NextFunction) => {
@@ -10,12 +9,12 @@ export default (req: Request, res: Response, next: NextFunction) => {
   return Product.find({ _id: { $in: items } })
     .then((products) => {
       if (products.length !== items.length) {
-        return next(new NotFoundError('Некоторые товары не найдены'));
+        return next(new BadRequestError('Некоторые товары не найдены'));
       }
 
       const totalPrice = products.reduce((acc, product) => {
         if (!product.price) {
-          next(new Error('Товар не продается'));
+          next(new BadRequestError('Товар не продается'));
           return 0;
         }
         return acc + product.price;
@@ -30,10 +29,10 @@ export default (req: Request, res: Response, next: NextFunction) => {
       }
 
       const orderId = simpleFaker.string.uuid();
-      return res.status(201).json({
+      return res.status(200).json({
         status: 'success',
         data: {
-          id: orderId,
+          _id: orderId,
           total: totalPrice,
         },
       });
