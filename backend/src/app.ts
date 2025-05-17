@@ -9,6 +9,8 @@ import orderRouter from './routes/order';
 import errorHandler from './middlewares/error-handler';
 import { requestLogger, errorLogger } from './middlewares/logger';
 
+const { errors } = require('celebrate');
+
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -38,6 +40,7 @@ mongoose
     });
 
     app.use(errorLogger);
+    app.use(errors());
     app.use(errorHandler);
 
     // Запуск сервера только после успешного подключения к БД
